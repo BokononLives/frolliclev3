@@ -11,4 +11,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("JakeScene");    
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("The Prod Game will close!");
+        Application.Quit();
+    }
 }
