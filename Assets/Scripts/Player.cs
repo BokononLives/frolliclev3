@@ -8,10 +8,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveSpeed = 15f;
     private Vector2 _inputVector;
     private Rigidbody playerRb;
-    [SerializeField] private float _maxXBound = 7f;
-    [SerializeField] private float _minXBound = -7f;
-    [SerializeField] private float _maxZBound = 7f;
-    [SerializeField] private float _minZBound = -7f;
+    [SerializeField] private float _maxXBound = 10f;
+    [SerializeField] private float _minXBound = -10f;
+    [SerializeField] private float _maxZBound = 6f;
+    [SerializeField] private float _minZBound = -10f;
 
     void Start()
     {

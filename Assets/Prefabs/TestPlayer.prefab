@@ -146,10 +146,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 15
-  _maxXBound: 7
-  _minXBound: -7
-  _maxZBound: 7
-  _minZBound: -7
+  _maxXBound: 10
+  _minXBound: -10
+  _maxZBound: 6
+  _minZBound: -10
 --- !u!54 &9153298854647317900
 Rigidbody:
   m_ObjectHideFlags: 0
