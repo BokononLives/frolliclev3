@@ -21,9 +21,13 @@ public class PieceGenerator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            //if (blocked) { return; } //TODO
+            if (IsBlocked())
+            {
+                Debug.Log("Blocked!");
+                return;
+            }
 
             var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
 
@@ -43,5 +47,32 @@ public class PieceGenerator : MonoBehaviour
                 square.transform.parent = gameObject.transform;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R)) //TODO: do this when the game's over
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.tag == "PlayerCube")
+                {
+                    child.GetComponent<Rigidbody>().isKinematic = false;
+                }
+            }
+        }
+    }
+
+    private bool IsBlocked()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.tag == "PlayerCube")
+            {
+                if (child.GetComponent<CubeCollider>().Blocked)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
