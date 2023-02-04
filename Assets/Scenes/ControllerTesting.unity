@@ -596,7 +596,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -632,7 +632,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1344398443
 GameObject:
@@ -721,7 +721,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1409182652
 GameObject:
@@ -749,13 +749,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1409182652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.01, y: 1, z: 0}
+  m_LocalPosition: {x: 2.01, y: 2.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 590951817}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1409182654
 MonoBehaviour:
@@ -769,7 +769,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6db438a4f135940bb4f0c40c5378b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 7
+  _move: {fileID: 5052918027055809131, guid: 161c3fb98ca70784fab55ecccab0408a, type: 3}
+  _drop: {fileID: -4353862231921966496, guid: 161c3fb98ca70784fab55ecccab0408a, type: 3}
+  _rotateLeft: {fileID: -6823946734572803660, guid: 161c3fb98ca70784fab55ecccab0408a,
+    type: 3}
+  _rotateRight: {fileID: -1823205186770888542, guid: 161c3fb98ca70784fab55ecccab0408a,
+    type: 3}
+  _moveSpeed: 15
 --- !u!54 &1409182655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -784,7 +790,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 36
   m_CollisionDetection: 0
 --- !u!1 &1496213092
 GameObject:
@@ -882,7 +888,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716916997
 GameObject:
@@ -944,7 +950,19 @@ MonoBehaviour:
     m_ActionId: 490a0d05-0945-4f59-9229-3a15aaddb9af
     m_ActionName: Player/Move[/SwitchProControllerHID/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1409182654}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnDropInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 413499f8-14e9-4674-bbbf-2eb9a99321eb
     m_ActionName: Player/Drop[/SwitchProControllerHID/buttonSouth,/Keyboard/space]
   - m_PersistentCalls:
@@ -1013,5 +1031,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
