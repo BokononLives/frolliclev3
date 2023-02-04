@@ -922,7 +922,7 @@ MonoBehaviour:
   m_Actions: {fileID: -944628639613478452, guid: 161c3fb98ca70784fab55ecccab0408a,
     type: 3}
   m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 1344398444}
+  m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []

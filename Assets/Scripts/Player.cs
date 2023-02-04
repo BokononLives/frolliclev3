@@ -15,12 +15,12 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _drop.action.started += OnDropInput;
+        //_drop.action.started += OnDropInput;
     }
 
     private void OnDisable()
     {
-        _drop.action.started -= OnDropInput;
+        //_drop.action.started -= OnDropInput;
     }
     // Start is called before the first frame update
     void Start()
@@ -35,12 +35,14 @@ public class Player : MonoBehaviour
     }
     public void OnMoveInput(InputAction.CallbackContext context)
     {
-        Debug.Log(_inputVector);
         _inputVector = context.ReadValue<Vector2>();
     }
     public void OnDropInput(InputAction.CallbackContext context)
     {
-        Debug.Log("drop");
+        if (context.started)
+        {
+            Debug.Log("drop");
+        }
     }
     private void Move()
     {
