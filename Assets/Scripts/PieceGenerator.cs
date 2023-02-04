@@ -23,6 +23,7 @@ public class PieceGenerator : MonoBehaviour
         { Piece.J, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(-0.5f, 1.5f, -0.1f) } },
         { Piece.L, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } }
     };
+    private Vector3 _correction = new Vector3(-0.5f, -0.5f, 0);
 
     void Start()
     {
@@ -57,7 +58,7 @@ public class PieceGenerator : MonoBehaviour
 
             foreach (var squarePosition in SquarePositions[nextPiece])
             {
-                var square = Instantiate(PlayerCube, transform.position + squarePosition, Quaternion.identity);
+                var square = Instantiate(PlayerCube, transform.position + squarePosition + _correction, Quaternion.identity);
                 square.transform.parent = gameObject.transform;
             }
         }
