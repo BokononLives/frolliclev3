@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerCube
+  - PlantedHair
   layers:
   - Default
   - TransparentFX
