@@ -5,6 +5,7 @@ public class CubeCollider : MonoBehaviour
 {
     public bool Blocked = false;
     public bool BonusEligible = false;
+    public bool IsCore = false;
 
     private void OnTriggerEnter(Collider other)
     {

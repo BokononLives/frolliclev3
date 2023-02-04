@@ -89,6 +89,7 @@ public class PieceGenerator : MonoBehaviour
             var coreSquare = Instantiate(PlayerCube, transform.position + new Vector3(0.5f, 0.5f, -0.1f) + _correction, Quaternion.identity);
             coreSquare.transform.parent = gameObject.transform;
             coreSquare.GetComponent<MeshRenderer>().material = PieceMaterial;
+            coreSquare.GetComponent<CubeCollider>().IsCore = true;
 
             if (_ammo > 0)
             {
@@ -121,6 +122,11 @@ public class PieceGenerator : MonoBehaviour
     {
         if (context.started)
         {
+            if (IsCoreBlocked())
+            {
+                return; //TODO: feedback of some kind
+            }
+
             if (_ammo > 0)
             {
                 _ammo--;
@@ -154,6 +160,23 @@ public class PieceGenerator : MonoBehaviour
             if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
             {
                 if (child.GetComponent<CubeCollider>().Blocked)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsCoreBlocked()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
+            {
+                var cubeCollider = child.GetComponent<CubeCollider>();
+                if (cubeCollider.IsCore && cubeCollider.Blocked)
                 {
                     return true;
                 }
