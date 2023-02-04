@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerCube
   - PlantedHair
+  - BonusSquare
   layers:
   - Default
   - TransparentFX
