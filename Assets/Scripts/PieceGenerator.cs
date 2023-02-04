@@ -57,7 +57,7 @@ public class PieceGenerator : MonoBehaviour
 
             foreach (var squarePosition in SquarePositions[nextPiece])
             {
-                var square = Instantiate(PlayerCube, squarePosition, Quaternion.identity);
+                var square = Instantiate(PlayerCube, transform.position + squarePosition, Quaternion.identity);
                 square.transform.parent = gameObject.transform;
             }
         }
@@ -77,6 +77,30 @@ public class PieceGenerator : MonoBehaviour
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         _inputVector = context.ReadValue<Vector2>();
+    }
+
+    public void OnDropInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("drop");
+        }
+    }
+
+    public void OnRotateLeftInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("rotateLeft");
+        }
+    }
+    
+    public void OnRotateRightInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("rotateRight");
+        }
     }
 
     private void Move()

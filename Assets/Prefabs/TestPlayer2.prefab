@@ -110,15 +110,51 @@ MonoBehaviour:
     m_ActionId: 490a0d05-0945-4f59-9229-3a15aaddb9af
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3021860855131242687}
+        m_TargetAssemblyTypeName: PieceGenerator, Assembly-CSharp
+        m_MethodName: OnDropInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 413499f8-14e9-4674-bbbf-2eb9a99321eb
     m_ActionName: Player/Drop[/XInputControllerWindows/buttonSouth,/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3021860855131242687}
+        m_TargetAssemblyTypeName: PieceGenerator, Assembly-CSharp
+        m_MethodName: OnRotateLeftInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27f487da-a9c5-4808-aba9-f8d2e2f57de9
     m_ActionName: Player/RotateLeft[/XInputControllerWindows/buttonWest,/Mouse/leftButton,/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3021860855131242687}
+        m_TargetAssemblyTypeName: PieceGenerator, Assembly-CSharp
+        m_MethodName: OnRotateRightInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cf66d1ca-4822-4daf-abe8-3f2d4cb9f13b
     m_ActionName: Player/RotateRight[/XInputControllerWindows/buttonEast,/Mouse/rightButton,/Keyboard/e]
   - m_PersistentCalls:
