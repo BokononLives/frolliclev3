@@ -8,6 +8,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveSpeed = 15f;
     private Vector2 _inputVector;
     private Rigidbody playerRb;
+    [SerializeField] private float _maxXBound = 7f;
+    [SerializeField] private float _minXBound = -7f;
+    [SerializeField] private float _maxZBound = 7f;
+    [SerializeField] private float _minZBound = -7f;
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -45,7 +50,29 @@ public class Player : MonoBehaviour
     }
     private void Move()
     {
-        Vector3 moveVector3 = new Vector3(_inputVector.x, 0, _inputVector.y);
-        playerRb.velocity = moveVector3 * _moveSpeed;
+        if (transform.position.x <= _maxXBound &&
+            transform.position.x >= _minXBound &&
+            transform.position.z <= _maxZBound &&
+            transform.position.z >= _minZBound)
+        {
+            Vector3 moveVector3 = new Vector3(_inputVector.x, 0, _inputVector.y);
+            playerRb.velocity = moveVector3 * _moveSpeed;
+        }
+        if (transform.position.x > _maxXBound)
+        {
+            transform.position = new Vector3(_maxXBound, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x < _minXBound)
+        {
+            transform.position = new Vector3(_minXBound, transform.position.y, transform.position.z);
+        }
+        if (transform.position.z > _maxZBound)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, _maxZBound);
+        }
+        if (transform.position.z < _minZBound)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, _minZBound);
+        }
     }
 }
