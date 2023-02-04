@@ -31,4 +31,9 @@ public class MainMenu : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(graphicsIndex);
     }
+
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+    }
 }
