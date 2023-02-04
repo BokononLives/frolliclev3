@@ -6,6 +6,7 @@ public class PieceGenerator : MonoBehaviour
 {
     //private int _rotation; //TODO
     public GameObject PlayerCube;
+    public GameObject PlantedHair;
     private Piece CurrentPiece;
     private Piece[] RandomPieces = new Piece[] { Piece.I, Piece.O, Piece.T, Piece.S, Piece.Z, Piece.J, Piece.L };
     private Dictionary<Piece, List<Vector3>> SquarePositions = new Dictionary<Piece, List<Vector3>>
@@ -37,6 +38,8 @@ public class PieceGenerator : MonoBehaviour
             {
                 if (child.gameObject.tag == "PlayerCube")
                 {
+                    var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity);
+                    hair.GetComponent<MeshRenderer>().material.color = Color.red;
                     Destroy(child.gameObject);
                 }
             }
