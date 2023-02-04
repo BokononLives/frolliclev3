@@ -26,4 +26,9 @@ public class MainMenu : MonoBehaviour
     {
         audioMixer.SetFloat("volume", volume);
     }
+
+    public void SetGraphics (int graphicsIndex)
+    {
+        QualitySettings.SetQualityLevel(graphicsIndex);
+    }
 }
