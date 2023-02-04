@@ -8,15 +8,17 @@ using UnityEngine.SceneManagement;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _textTimer;
-    [SerializeField] private float _timer = 120f;
+    [SerializeField] private float _totalGameTime = 120f;
     [SerializeField] private float _waitTime = 3f;
     [SerializeField] private Animator _anim;
+    private float _timer;
     private bool _isTimerOn = false;
 
     public static event Action OnTimeUp;
 
     private void Start()
     {
+        _timer = _totalGameTime;
         StartCoroutine(StartTimer());
     }
 
@@ -33,27 +35,7 @@ public class Timer : MonoBehaviour
                 StopTimer();
                 ResetTimer();
                 _anim.SetBool("TimeEnd", true);
-                //Debug.Log(_anim.GetFloat("Direction"));
-                //_anim.Play("TimerChange", -1, float.NegativeInfinity);
             }
-        }
-    }
-
-    private void ResetTimeOnSpeed01(Scene oldScene, Scene newScene)
-    {
-        if (SceneManager.GetActiveScene().name.Equals("Speed01"))
-        {
-            ResetTimer();
-            StartTimer();
-            _anim.Play("ResetPosition", -1, 0f);
-        }
-    }
-    private void ShowFinalSpeedScore(Scene oldScene, Scene newScene)
-    {
-        if (SceneManager.GetActiveScene().name.Equals("SpeedRun"))
-        {
-            StopTimer();
-            _anim.Play("ShowFinalScore", -1, 0f);
         }
     }
 
@@ -77,6 +59,6 @@ public class Timer : MonoBehaviour
     }
     private void ResetTimer()
     {
-        _timer = 120f;
+        _timer = _totalGameTime;
     }
 }
