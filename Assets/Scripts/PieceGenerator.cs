@@ -47,7 +47,7 @@ public class PieceGenerator : MonoBehaviour
 
             foreach (Transform child in transform)
             {
-                if (child.gameObject.tag == "PlayerCube")
+                if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
                 {
                     var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity);
                     hair.GetComponent<MeshRenderer>().material.color = Color.red;
@@ -66,7 +66,7 @@ public class PieceGenerator : MonoBehaviour
         {
             foreach (Transform child in transform)
             {
-                if (child.gameObject.tag == "PlayerCube")
+                if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
                 {
                     child.GetComponent<Rigidbody>().isKinematic = false;
                 }
@@ -113,7 +113,7 @@ public class PieceGenerator : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if (child.gameObject.tag == "PlayerCube")
+            if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
             {
                 if (child.GetComponent<CubeCollider>().Blocked)
                 {

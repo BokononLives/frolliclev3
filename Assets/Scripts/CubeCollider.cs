@@ -1,3 +1,4 @@
+using Frollicle.Core;
 using UnityEngine;
 
 public class CubeCollider : MonoBehaviour
@@ -6,7 +7,7 @@ public class CubeCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "PlantedHair")
+        if (other.gameObject.tag == CustomTag.PlantedHair.ToString())
         {
             Blocked = true;
         }
@@ -14,7 +15,7 @@ public class CubeCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "PlantedHair")
+        if (other.gameObject.tag == CustomTag.PlantedHair.ToString())
         {
             Blocked = false;
         }
