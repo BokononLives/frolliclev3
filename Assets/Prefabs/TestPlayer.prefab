@@ -145,12 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6db438a4f135940bb4f0c40c5378b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _move: {fileID: 5052918027055809131, guid: 161c3fb98ca70784fab55ecccab0408a, type: 3}
-  _drop: {fileID: -4353862231921966496, guid: 161c3fb98ca70784fab55ecccab0408a, type: 3}
-  _rotateLeft: {fileID: -6823946734572803660, guid: 161c3fb98ca70784fab55ecccab0408a,
-    type: 3}
-  _rotateRight: {fileID: -1823205186770888542, guid: 161c3fb98ca70784fab55ecccab0408a,
-    type: 3}
   _moveSpeed: 15
 --- !u!54 &9153298854647317900
 Rigidbody:
@@ -227,11 +221,35 @@ MonoBehaviour:
     m_ActionId: 413499f8-14e9-4674-bbbf-2eb9a99321eb
     m_ActionName: Player/Drop[/SwitchProControllerHID/buttonSouth,/SwitchProControllerHID1/buttonSouth,/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9153298854647317901}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnRotateLeftInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27f487da-a9c5-4808-aba9-f8d2e2f57de9
     m_ActionName: Player/RotateLeft[/SwitchProControllerHID/buttonWest,/SwitchProControllerHID1/buttonWest,/Mouse/leftButton,/Keyboard/q]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9153298854647317901}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnRotateRightInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cf66d1ca-4822-4daf-abe8-3f2d4cb9f13b
     m_ActionName: Player/RotateRight[/SwitchProControllerHID/buttonEast,/SwitchProControllerHID1/buttonEast,/Mouse/rightButton,/Keyboard/e]
   - m_PersistentCalls:
