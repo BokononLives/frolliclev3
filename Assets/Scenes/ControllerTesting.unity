@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad49617fc6380174397e6f657690b678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hairMaterial: {fileID: 2100000, guid: 3056bfb20ad4cab468bc2caf6b393ca6, type: 2}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +789,7 @@ Transform:
   m_GameObject: {fileID: 1496213092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
