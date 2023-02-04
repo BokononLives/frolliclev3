@@ -1222,6 +1222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c6f770fc04fd847862b8eb919bb609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BonusSquare: {fileID: 3417754122638622778, guid: 8bc1f13109cf01241803f931958b62cc,
+    type: 3}
   MinWaitTime: 3
   MaxWaitTime: 15
 --- !u!1 &478535227

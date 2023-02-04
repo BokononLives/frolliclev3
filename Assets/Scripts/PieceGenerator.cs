@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PieceGenerator : MonoBehaviour
 {
+    [SerializeField] private int _ammo = 0;
     public GameObject PlayerCube;
     public GameObject PlantedHair;
     [SerializeField] private float _moveSpeed = 15f;
@@ -14,13 +15,13 @@ public class PieceGenerator : MonoBehaviour
     private Piece[] RandomPieces = new Piece[] { Piece.I, Piece.O, Piece.T, Piece.S, Piece.Z, Piece.J, Piece.L };
     private Dictionary<Piece, List<Vector3>> SquarePositions = new Dictionary<Piece, List<Vector3>>
     {
-        { Piece.I, new List<Vector3> { new Vector3(0.5f, -0.5f, -0.1f), new Vector3(0.5f, 0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(0.5f, 2.5f, -0.1f) } },
-        { Piece.O, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } },
-        { Piece.T, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f) } },
-        { Piece.S, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } },
-        { Piece.Z, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(-0.5f, 1.5f, -0.1f) } },
-        { Piece.J, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(-0.5f, 1.5f, -0.1f) } },
-        { Piece.L, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } }
+        { Piece.I, new List<Vector3> { new Vector3(0.5f, -0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(0.5f, 2.5f, -0.1f) } },
+        { Piece.O, new List<Vector3> { new Vector3(0.5f, 1.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } },
+        { Piece.T, new List<Vector3> { new Vector3(0.5f, 1.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f) } },
+        { Piece.S, new List<Vector3> { new Vector3(0.5f, 1.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } },
+        { Piece.Z, new List<Vector3> { new Vector3(0.5f, 1.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(-0.5f, 1.5f, -0.1f) } },
+        { Piece.J, new List<Vector3> { new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(-0.5f, 1.5f, -0.1f) } },
+        { Piece.L, new List<Vector3> { new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } }
     };
     private Vector3 _correction = new Vector3(-0.5f, -0.5f, 0);
 
@@ -60,6 +61,11 @@ public class PieceGenerator : MonoBehaviour
                 return;
             }
 
+            if (IsBonusEligible())
+            {
+                _ammo += 5;
+            }
+
             var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
 
             foreach (Transform child in transform)
@@ -76,6 +82,13 @@ public class PieceGenerator : MonoBehaviour
             {
                 var square = Instantiate(PlayerCube, transform.position + squarePosition + _correction, Quaternion.identity);
                 square.transform.parent = gameObject.transform;
+            }
+
+            var coreSquare = Instantiate(PlayerCube, transform.position + new Vector3(0.5f, 0.5f, -0.1f) + _correction, Quaternion.identity);
+            coreSquare.transform.parent = gameObject.transform;
+            if (_ammo > 0)
+            {
+                coreSquare.GetComponent<MeshRenderer>().material.color = Color.yellow;
             }
         }
     }
@@ -96,6 +109,30 @@ public class PieceGenerator : MonoBehaviour
         }
     }
 
+    public void OnSpecialInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (_ammo > 0)
+            {
+                _ammo--;
+                var hair = Instantiate(PlantedHair, transform.position + new Vector3(0.5f, 0.5f, -0.1f) + _correction, Quaternion.identity);
+                hair.GetComponent<MeshRenderer>().material.color = Color.yellow;
+            }
+
+            if (_ammo <= 0)
+            {
+                foreach (Transform child in transform)
+                {
+                    if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
+                    {
+                        child.GetComponent<MeshRenderer>().material.color = Color.red;
+                    }
+                }
+            }
+        }
+    }
+
     private void Move()
     {
         Vector3 moveVector3 = new Vector3(_inputVector.x, _inputVector.y, 0);
@@ -109,6 +146,22 @@ public class PieceGenerator : MonoBehaviour
             if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
             {
                 if (child.GetComponent<CubeCollider>().Blocked)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsBonusEligible()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
+            {
+                if (child.GetComponent<CubeCollider>().BonusEligible)
                 {
                     return true;
                 }

@@ -4,6 +4,7 @@ using Random = UnityEngine.Random;
 
 public class BonusSquarePicker : MonoBehaviour
 {
+    public GameObject BonusSquare;
     public float MinWaitTime = 3f;
     public float MaxWaitTime = 15f;
 
@@ -21,7 +22,7 @@ public class BonusSquarePicker : MonoBehaviour
         var now = DateTime.Now;
         if (now >= NextPickTime)
         {
-            Debug.Log("Pick a winner");
+            Instantiate(BonusSquare, new Vector3(0.5f, 0.5f, -0.1f), Quaternion.identity);
             LastPickTime = now;
             NextPickTime = GetNextPickTime();
         }
