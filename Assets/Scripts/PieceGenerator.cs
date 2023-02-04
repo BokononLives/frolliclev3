@@ -13,6 +13,7 @@ public class PieceGenerator : MonoBehaviour
     private Rigidbody playerRb;
     private Piece CurrentPiece;
     private Piece[] RandomPieces = new Piece[] { Piece.I, Piece.O, Piece.T, Piece.S, Piece.Z, Piece.J, Piece.L };
+    public Material PieceMaterial;
     private Dictionary<Piece, List<Vector3>> SquarePositions = new Dictionary<Piece, List<Vector3>>
     {
         { Piece.I, new List<Vector3> { new Vector3(0.5f, -0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(0.5f, 2.5f, -0.1f) } },
@@ -82,13 +83,20 @@ public class PieceGenerator : MonoBehaviour
             {
                 var square = Instantiate(PlayerCube, transform.position + squarePosition + _correction, Quaternion.identity);
                 square.transform.parent = gameObject.transform;
+                square.GetComponent<MeshRenderer>().material = PieceMaterial;
             }
 
             var coreSquare = Instantiate(PlayerCube, transform.position + new Vector3(0.5f, 0.5f, -0.1f) + _correction, Quaternion.identity);
             coreSquare.transform.parent = gameObject.transform;
+            coreSquare.GetComponent<MeshRenderer>().material = PieceMaterial;
+
             if (_ammo > 0)
             {
-                coreSquare.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                var color = coreSquare.GetComponent<MeshRenderer>().material.color;
+                color.r = Mathf.Min(1f, color.r + 0.25f);
+                color.g = Mathf.Min(1f, color.g + 0.25f);
+                color.b = Mathf.Min(1f, color.b + 0.25f);
+                coreSquare.GetComponent<MeshRenderer>().material.color = color;
             }
         }
     }
@@ -126,7 +134,7 @@ public class PieceGenerator : MonoBehaviour
                 {
                     if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
                     {
-                        child.GetComponent<MeshRenderer>().material.color = Color.red;
+                        child.GetComponent<MeshRenderer>().material = PieceMaterial;
                     }
                 }
             }
