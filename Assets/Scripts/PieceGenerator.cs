@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PieceGenerator : MonoBehaviour
 {
-    //private int _rotation; //TODO
     public GameObject PlayerCube;
     public GameObject PlantedHair;
     [SerializeField] private float _moveSpeed = 15f;
@@ -23,6 +22,7 @@ public class PieceGenerator : MonoBehaviour
         { Piece.J, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(-0.5f, 1.5f, -0.1f) } },
         { Piece.L, new List<Vector3> { new Vector3(0.5f, 0.5f, -0.1f), new Vector3(-0.5f, 0.5f, -0.1f), new Vector3(1.5f, 0.5f, -0.1f), new Vector3(1.5f, 1.5f, -0.1f) } }
     };
+    private Vector3 _correction = new Vector3(-0.5f, -0.5f, 0);
 
     void Start()
     {
@@ -32,35 +32,6 @@ public class PieceGenerator : MonoBehaviour
     void Update()
     {
         Move();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (IsBlocked())
-            {
-                Debug.Log("Blocked!");
-                return;
-            }
-
-            var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
-
-            //switch (_rotation) {} //TODO
-
-            foreach (Transform child in transform)
-            {
-                if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
-                {
-                    var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity);
-                    hair.GetComponent<MeshRenderer>().material.color = Color.red;
-                    Destroy(child.gameObject);
-                }
-            }
-
-            foreach (var squarePosition in SquarePositions[nextPiece])
-            {
-                var square = Instantiate(PlayerCube, transform.position + squarePosition, Quaternion.identity);
-                square.transform.parent = gameObject.transform;
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.R)) //TODO: do this when the game's over
         {
@@ -83,7 +54,29 @@ public class PieceGenerator : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("drop");
+            if (IsBlocked())
+            {
+                Debug.Log("Blocked!"); //TODO: feedback of some kind
+                return;
+            }
+
+            var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
+
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
+                {
+                    var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity);
+                    hair.GetComponent<MeshRenderer>().material.color = Color.red;
+                    Destroy(child.gameObject);
+                }
+            }
+
+            foreach (var squarePosition in SquarePositions[nextPiece])
+            {
+                var square = Instantiate(PlayerCube, transform.position + squarePosition + _correction, Quaternion.identity);
+                square.transform.parent = gameObject.transform;
+            }
         }
     }
 
