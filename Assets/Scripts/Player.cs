@@ -5,24 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private InputActionReference _move;
-    [SerializeField] private InputActionReference _drop;
-    [SerializeField] private InputActionReference _rotateLeft;
-    [SerializeField] private InputActionReference _rotateRight;
-    [SerializeField] private float _moveSpeed = 7f;
+    [SerializeField] private float _moveSpeed = 15f;
     private Vector2 _inputVector;
     private Rigidbody playerRb;
-
-    private void OnEnable()
-    {
-        //_drop.action.started += OnDropInput;
-    }
-
-    private void OnDisable()
-    {
-        //_drop.action.started -= OnDropInput;
-    }
-    // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
@@ -42,6 +27,20 @@ public class Player : MonoBehaviour
         if (context.started)
         {
             Debug.Log("drop");
+        }
+    }
+    public void OnRotateLeftInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("rotateLeft");
+        }
+    }
+    public void OnRotateRightInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("rotateRight");
         }
     }
     private void Move()
