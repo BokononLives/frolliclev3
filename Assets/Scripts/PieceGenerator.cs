@@ -91,7 +91,7 @@ public class PieceGenerator : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("rotateLeft");
+            transform.Rotate(new Vector3(0, 0, 90f));
         }
     }
     
@@ -99,7 +99,7 @@ public class PieceGenerator : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("rotateRight");
+            transform.Rotate(new Vector3(0, 0, -90f));
         }
     }
 
