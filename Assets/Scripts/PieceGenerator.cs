@@ -15,10 +15,10 @@ public class PieceGenerator : MonoBehaviour
     private Piece[] RandomPieces = new Piece[] { Piece.I, Piece.O, Piece.T, Piece.S, Piece.Z, Piece.J, Piece.L };
     public Material PieceMaterial;
     public GameObject BonusSquarePicker;
-    [SerializeField] private float _maxXBound = 10f;
-    [SerializeField] private float _minXBound = -10f;
-    [SerializeField] private float _maxYBound = 10f;
-    [SerializeField] private float _minYBound = -10f;
+    [SerializeField] private float _maxXBound = 9.5f;
+    [SerializeField] private float _minXBound = -9.5f;
+    [SerializeField] private float _maxYBound = 9.5f;
+    [SerializeField] private float _minYBound = -9.5f;
     public PlayerInput PlayerInput;
 
     private Dictionary<Piece, List<Vector3>> SquarePositions = new Dictionary<Piece, List<Vector3>>
@@ -160,33 +160,57 @@ public class PieceGenerator : MonoBehaviour
 
     private void Move()
     {
-        //TODO: calculate bounds by CurrentPiece + Rotation
-        // ...OR: put a trigger collider all around the outside of the grid
-        //    ... and if you're inside of it, then you can't Drop your piece
-        
-        if (transform.position.x <= _maxXBound &&
-            transform.position.x >= _minXBound &&
-            transform.position.y <= _maxYBound &&
-            transform.position.y >= _minYBound)
+        var leftMost = (float?)null;
+        var rightMost = (float?)null;
+        var topMost = (float?)null;
+        var bottomMost = (float?)null;
+
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
+            {
+                if (leftMost == null || child.position.x < leftMost)
+                {
+                    leftMost = child.position.x;
+                }
+                if (rightMost == null || child.position.x > rightMost)
+                {
+                    rightMost = child.position.x;
+                }
+                if (topMost == null || child.position.y > topMost)
+                {
+                    topMost = child.position.y;
+                }
+                if (bottomMost == null || child.position.y < bottomMost)
+                {
+                    bottomMost = child.position.y;
+                }
+            }
+        }
+
+        if (rightMost <= _maxXBound &&
+            leftMost >= _minXBound &&
+            topMost <= _maxYBound &&
+            bottomMost >= _minYBound)
         {
             Vector3 moveVector3 = new Vector3(_inputVector.x, _inputVector.y, 0);
             playerRb.velocity = moveVector3 * _moveSpeed;
         }
-        if (transform.position.x > _maxXBound)
+        if (rightMost > _maxXBound)
         {
-            transform.position = new Vector3(_maxXBound, transform.position.y, transform.position.z);
+            transform.position = new Vector3(_maxXBound - (rightMost.Value - transform.position.x), transform.position.y, transform.position.z);
         }
-        if (transform.position.x < _minXBound)
+        if (leftMost < _minXBound)
         {
-            transform.position = new Vector3(_minXBound, transform.position.y, transform.position.z);
+            transform.position = new Vector3(_minXBound + (transform.position.x - leftMost.Value), transform.position.y, transform.position.z);
         }
-        if (transform.position.y > _maxYBound)
+        if (topMost > _maxYBound)
         {
-            transform.position = new Vector3(transform.position.x, _maxYBound, transform.position.z);
+            transform.position = new Vector3(transform.position.x, _maxYBound - (topMost.Value - transform.position.y), transform.position.z);
         }
-        if (transform.position.y < _minYBound)
+        if (bottomMost < _minYBound)
         {
-            transform.position = new Vector3(transform.position.x, _minYBound, transform.position.z);
+            transform.position = new Vector3(transform.position.x, _minYBound + (transform.position.y - bottomMost.Value), transform.position.z);
         }
     }
 
