@@ -19,6 +19,7 @@ public class PieceGenerator : MonoBehaviour
     [SerializeField] private float _minXBound = -10f;
     [SerializeField] private float _maxYBound = 10f;
     [SerializeField] private float _minYBound = -10f;
+    public PlayerInput PlayerInput;
 
     private Dictionary<Piece, List<Vector3>> SquarePositions = new Dictionary<Piece, List<Vector3>>
     {
@@ -35,6 +36,7 @@ public class PieceGenerator : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        PlayerInput = GetComponent<PlayerInput>();
     }
 
     void Update()
@@ -81,7 +83,9 @@ public class PieceGenerator : MonoBehaviour
             {
                 if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
                 {
-                    var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity);
+                    var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity).GetComponent<PlantedHair>();
+                    hair.Color = PieceMaterial.color;
+                    hair.PlayerIndex = this.PlayerInput.playerIndex;
                     Destroy(child.gameObject);
                 }
             }
