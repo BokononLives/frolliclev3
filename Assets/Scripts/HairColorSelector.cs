@@ -9,7 +9,6 @@ public class HairColorSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       color = GetComponent<Image>().Color;
     }
 
     // Update is called once per frame
