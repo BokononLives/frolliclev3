@@ -1,10 +1,15 @@
+using System.Collections;
 using System.Linq;
 using Frollicle.Core;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scorekeeper : MonoBehaviour
 {
     public GameObject CountdownTimer;
+    public TMP_Text TextPanel;
+    public Button Button;
 
     void Start()
     {
@@ -13,21 +18,24 @@ public class Scorekeeper : MonoBehaviour
 
     private void EndGame()
     {
-        foreach (var cube in GameObject.FindGameObjectsWithTag(CustomTag.PlayerCube.ToString()))
+        var hairFollicles = GameObject.FindGameObjectsWithTag(CustomTag.PlantedHair.ToString())
+            .Select(x => x.GetComponent<PlantedHair>())
+            .GroupBy(x => new { x.Color, x.PlayerIndex })
+            .OrderByDescending(x => x.Count())
+            .FirstOrDefault();
+        
+        if (hairFollicles != null)
         {
-            //TODO: disable input
-            cube.GetComponent<Rigidbody>().isKinematic = false;
-
-            var hairFollicles = GameObject.FindGameObjectsWithTag(CustomTag.PlantedHair.ToString())
-                .Select(x => x.GetComponent<PlantedHair>())
-                .GroupBy(x => new { x.Color, x.PlayerIndex })
-                .OrderByDescending(x => x.Count())
-                .FirstOrDefault();
-            
-            if (hairFollicles != null)
-            {
-                Debug.Log($"The winner is Player {hairFollicles.Key.PlayerIndex + 1}");
-            }
+            var text = $"The winner is Player {hairFollicles.Key.PlayerIndex + 1}";
+            StartCoroutine(ShowWinner(text));
         }
+    }
+
+    private IEnumerator ShowWinner(string text)
+    {
+        yield return new WaitForSeconds(2f);
+
+        TextPanel.text = text;
+        Button.enabled = true;
     }
 }

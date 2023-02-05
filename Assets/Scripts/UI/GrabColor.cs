@@ -22,7 +22,7 @@ public class GrabColor : MonoBehaviour
         }
         if (PlayerIndex >= GameManager.Instance.PlayerColor.Length)
         {
-            SceneManager.LoadScene("ControllerTesting");
+            SceneManager.LoadScene("JakeScene");
             return;
         }
         int playerNumber = PlayerIndex + 1;

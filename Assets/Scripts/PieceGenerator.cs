@@ -37,6 +37,7 @@ public class PieceGenerator : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         PlayerInput = GetComponent<PlayerInput>();
+        Timer.OnTimeUp += () => EndGame();
     }
 
     void Update()
@@ -53,6 +54,19 @@ public class PieceGenerator : MonoBehaviour
         //         }
         //     }
         // }
+    }
+
+    private void EndGame()
+    {
+        this.PlayerInput.SwitchCurrentActionMap("UI");
+
+        foreach (Transform cube in transform)// GameObject.FindGameObjectsWithTag(CustomTag.PlayerCube.ToString()))
+        {   
+            if (cube.gameObject.tag == CustomTag.PlayerCube.ToString())
+            {
+                cube.GetComponent<Rigidbody>().isKinematic = false;
+            }
+        }
     }
     
     public void OnMoveInput(InputAction.CallbackContext context)

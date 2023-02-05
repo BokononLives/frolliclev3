@@ -8,6 +8,7 @@ public class PlayerManagerV2 : MonoBehaviour
     private GameObject _playerPrefab;
     [SerializeField] private Material _hairMaterial;
     public GameObject BonusSquarePicker;
+    public static int _playerIndex = 0;
 
     public event Action<PlayerInput> OnPlayerJoined;
     private void Awake()
@@ -15,8 +16,9 @@ public class PlayerManagerV2 : MonoBehaviour
         _playerInputManager = GetComponent<PlayerInputManager>();
         _playerPrefab = _playerInputManager.playerPrefab;
         _playerPrefab.GetComponent<PieceGenerator>().BonusSquarePicker = BonusSquarePicker;
-        Color randomColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
-        _hairMaterial.color = randomColor;
+        Color chosenColor = GameManager.Instance.PlayerColor[_playerIndex];
+        //Color randomColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+        _hairMaterial.color = chosenColor;
         _playerPrefab.GetComponentInChildren<PieceGenerator>().PieceMaterial = _hairMaterial;
     }
     private void OnEnable()
@@ -31,9 +33,11 @@ public class PlayerManagerV2 : MonoBehaviour
 
     public void CreateRandomHairColor(PlayerInput obj)
     {
+        _playerIndex++;
         Material playerJoinedHairMaterial = new Material(_hairMaterial);
-        Color randomColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
-        playerJoinedHairMaterial.color = randomColor;
+        Color chosenColor = GameManager.Instance.PlayerColor[_playerIndex];
+        //Color randomColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+        playerJoinedHairMaterial.color = chosenColor;
         _playerPrefab.GetComponentInChildren<PieceGenerator>().PieceMaterial = playerJoinedHairMaterial;
     }
 
