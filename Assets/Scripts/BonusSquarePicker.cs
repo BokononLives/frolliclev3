@@ -1,3 +1,4 @@
+using Frollicle.Core;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,7 +7,7 @@ public class BonusSquarePicker : MonoBehaviour
 {
     public GameObject BonusSquare;
     public float MinWaitTime = 3f;
-    public float MaxWaitTime = 15f;
+    public float MaxWaitTime = 8f;
 
     private DateTime LastPickTime = DateTime.MinValue;
     private DateTime NextPickTime = DateTime.MinValue;
@@ -22,7 +23,9 @@ public class BonusSquarePicker : MonoBehaviour
         var now = DateTime.Now;
         if (now >= NextPickTime)
         {
-            Instantiate(BonusSquare, new Vector3(0.5f, 0.5f, -0.1f), Quaternion.identity);
+            DestroyBonusSquares();
+
+            Instantiate(BonusSquare, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), -0.1f), Quaternion.identity);
             LastPickTime = now;
             NextPickTime = GetNextPickTime();
         }
@@ -31,5 +34,18 @@ public class BonusSquarePicker : MonoBehaviour
     private DateTime GetNextPickTime()
     {
         return DateTime.Now.AddSeconds(Random.Range(MinWaitTime, MaxWaitTime));
+    }
+
+    public void DestroyBonusSquares()
+    {
+        foreach (var bonusSquare in GetBonusSquares())
+        {
+            Destroy(bonusSquare);
+        }
+    }
+
+    private GameObject[] GetBonusSquares()
+    {
+        return GameObject.FindGameObjectsWithTag(CustomTag.BonusSquare.ToString());
     }
 }

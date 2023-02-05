@@ -7,12 +7,14 @@ public class PlayerManagerV2 : MonoBehaviour
     private PlayerInputManager _playerInputManager;
     private GameObject _playerPrefab;
     [SerializeField] private Material _hairMaterial;
+    public GameObject BonusSquarePicker;
 
     public event Action<PlayerInput> OnPlayerJoined;
     private void Awake()
     {
         _playerInputManager = GetComponent<PlayerInputManager>();
         _playerPrefab = _playerInputManager.playerPrefab;
+        _playerPrefab.GetComponent<PieceGenerator>().BonusSquarePicker = BonusSquarePicker;
         Color randomColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
         _hairMaterial.color = randomColor;
         _playerPrefab.GetComponentInChildren<PieceGenerator>().PieceMaterial = _hairMaterial;

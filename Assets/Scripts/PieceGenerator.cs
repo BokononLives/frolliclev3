@@ -14,6 +14,8 @@ public class PieceGenerator : MonoBehaviour
     private Piece CurrentPiece;
     private Piece[] RandomPieces = new Piece[] { Piece.I, Piece.O, Piece.T, Piece.S, Piece.Z, Piece.J, Piece.L };
     public Material PieceMaterial;
+    public GameObject BonusSquarePicker;
+
     private Dictionary<Piece, List<Vector3>> SquarePositions = new Dictionary<Piece, List<Vector3>>
     {
         { Piece.I, new List<Vector3> { new Vector3(0.5f, -0.5f, -0.1f), new Vector3(0.5f, 1.5f, -0.1f), new Vector3(0.5f, 2.5f, -0.1f) } },
@@ -65,6 +67,7 @@ public class PieceGenerator : MonoBehaviour
             if (IsBonusEligible())
             {
                 _ammo += 5;
+                BonusSquarePicker.GetComponent<BonusSquarePicker>().DestroyBonusSquares();
             }
 
             var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
@@ -74,7 +77,6 @@ public class PieceGenerator : MonoBehaviour
                 if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
                 {
                     var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity);
-                    hair.GetComponent<MeshRenderer>().material.color = Color.red;
                     Destroy(child.gameObject);
                 }
             }
