@@ -142,7 +142,7 @@ Material:
     - _ShadowStrength: 0.7
     - _SkinShadowBias: 1
     - _SkinShadowSamplingBias: 0.0345
-    - _Smoothness: 0.5417591
+    - _Smoothness: 0.498
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
