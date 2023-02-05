@@ -855,7 +855,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time Left: 00:10'
+  m_text: 'Time Left: 02:00'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ebb134945ce738e4692c5ec21dc762c8, type: 2}
   m_sharedMaterial: {fileID: 5571152730319498335, guid: ebb134945ce738e4692c5ec21dc762c8,
@@ -999,6 +999,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textTimer: {fileID: 1727852542}
-  _timer: 10
+  _totalGameTime: 120
   _waitTime: 2
   _anim: {fileID: 1727852544}
