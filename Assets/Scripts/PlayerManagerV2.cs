@@ -17,7 +17,6 @@ public class PlayerManagerV2 : MonoBehaviour
         _playerPrefab = _playerInputManager.playerPrefab;
         _playerPrefab.GetComponent<PieceGenerator>().BonusSquarePicker = BonusSquarePicker;
         Color chosenColor = GameManager.Instance.PlayerColor[_playerIndex];
-        //Color randomColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
         _hairMaterial.color = chosenColor;
         _playerPrefab.GetComponentInChildren<PieceGenerator>().PieceMaterial = _hairMaterial;
     }
@@ -35,8 +34,8 @@ public class PlayerManagerV2 : MonoBehaviour
     {
         _playerIndex++;
         Material playerJoinedHairMaterial = new Material(_hairMaterial);
+        if (_playerIndex >= GameManager.Instance.PlayerColor.Length) return;
         Color chosenColor = GameManager.Instance.PlayerColor[_playerIndex];
-        //Color randomColor = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
         playerJoinedHairMaterial.color = chosenColor;
         _playerPrefab.GetComponentInChildren<PieceGenerator>().PieceMaterial = playerJoinedHairMaterial;
     }
