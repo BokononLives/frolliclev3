@@ -12,10 +12,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float _minXBound = -10f;
     [SerializeField] private float _maxZBound = 6f;
     [SerializeField] private float _minZBound = -10f;
+    private PlayerInput _playerInput;
 
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        _playerInput = GetComponent<PlayerInput>();
+        Debug.Log(_playerInput.playerIndex);
     }
 
     // Update is called once per frame
