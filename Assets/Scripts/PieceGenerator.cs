@@ -142,7 +142,7 @@ public class PieceGenerator : MonoBehaviour
             {
                 _ammo--;
                 var hair = Instantiate(PlantedHair, transform.position + new Vector3(0.5f, 0.5f, -0.1f) + _correction, Quaternion.identity);
-                hair.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                //hair.GetComponent<MeshRenderer>().material.color = Color.yellow;
             }
 
             if (_ammo <= 0)
