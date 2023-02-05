@@ -15,6 +15,10 @@ public class PieceGenerator : MonoBehaviour
     private Piece[] RandomPieces = new Piece[] { Piece.I, Piece.O, Piece.T, Piece.S, Piece.Z, Piece.J, Piece.L };
     public Material PieceMaterial;
     public GameObject BonusSquarePicker;
+    [SerializeField] private float _maxXBound = 10f;
+    [SerializeField] private float _minXBound = -10f;
+    [SerializeField] private float _maxYBound = 10f;
+    [SerializeField] private float _minYBound = -10f;
 
     private Dictionary<Piece, List<Vector3>> SquarePositions = new Dictionary<Piece, List<Vector3>>
     {
@@ -71,6 +75,7 @@ public class PieceGenerator : MonoBehaviour
             }
 
             var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
+            CurrentPiece = nextPiece;
 
             foreach (Transform child in transform)
             {
@@ -151,8 +156,34 @@ public class PieceGenerator : MonoBehaviour
 
     private void Move()
     {
-        Vector3 moveVector3 = new Vector3(_inputVector.x, _inputVector.y, 0);
-        playerRb.velocity = moveVector3 * _moveSpeed;
+        //TODO: calculate bounds by CurrentPiece + Rotation
+        // ...OR: put a trigger collider all around the outside of the grid
+        //    ... and if you're inside of it, then you can't Drop your piece
+        
+        if (transform.position.x <= _maxXBound &&
+            transform.position.x >= _minXBound &&
+            transform.position.y <= _maxYBound &&
+            transform.position.y >= _minYBound)
+        {
+            Vector3 moveVector3 = new Vector3(_inputVector.x, _inputVector.y, 0);
+            playerRb.velocity = moveVector3 * _moveSpeed;
+        }
+        if (transform.position.x > _maxXBound)
+        {
+            transform.position = new Vector3(_maxXBound, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x < _minXBound)
+        {
+            transform.position = new Vector3(_minXBound, transform.position.y, transform.position.z);
+        }
+        if (transform.position.y > _maxYBound)
+        {
+            transform.position = new Vector3(transform.position.x, _maxYBound, transform.position.z);
+        }
+        if (transform.position.y < _minYBound)
+        {
+            transform.position = new Vector3(transform.position.x, _minYBound, transform.position.z);
+        }
     }
 
     private bool IsBlocked()
