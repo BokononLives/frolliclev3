@@ -43,16 +43,16 @@ public class PieceGenerator : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKeyDown(KeyCode.R)) //TODO: do this when the game's over
-        {
-            foreach (Transform child in transform)
-            {
-                if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
-                {
-                    child.GetComponent<Rigidbody>().isKinematic = false;
-                }
-            }
-        }
+        // if (Input.GetKeyDown(KeyCode.R)) //TODO: do this when the game's over
+        // {
+        //     foreach (Transform child in transform)
+        //     {
+        //         if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
+        //         {
+        //             child.GetComponent<Rigidbody>().isKinematic = false;
+        //         }
+        //     }
+        // }
     }
     
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -76,9 +76,6 @@ public class PieceGenerator : MonoBehaviour
                 BonusSquarePicker.GetComponent<BonusSquarePicker>().DestroyBonusSquares();
             }
 
-            var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
-            CurrentPiece = nextPiece;
-
             foreach (Transform child in transform)
             {
                 if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
@@ -86,30 +83,45 @@ public class PieceGenerator : MonoBehaviour
                     var hair = Instantiate(PlantedHair, child.transform.position, Quaternion.identity).GetComponent<PlantedHair>();
                     hair.Color = PieceMaterial.color;
                     hair.PlayerIndex = this.PlayerInput.playerIndex;
-                    Destroy(child.gameObject);
                 }
             }
 
-            foreach (var squarePosition in SquarePositions[nextPiece])
-            {
-                var square = Instantiate(PlayerCube, transform.position + squarePosition + _correction, Quaternion.identity);
-                square.transform.parent = gameObject.transform;
-                square.GetComponent<MeshRenderer>().material = PieceMaterial;
-            }
+            ChangePiece();
+        }
+    }
 
-            var coreSquare = Instantiate(PlayerCube, transform.position + new Vector3(0.5f, 0.5f, -0.1f) + _correction, Quaternion.identity);
-            coreSquare.transform.parent = gameObject.transform;
-            coreSquare.GetComponent<MeshRenderer>().material = PieceMaterial;
-            coreSquare.GetComponent<CubeCollider>().IsCore = true;
-
-            if (_ammo > 0)
+    private void ChangePiece()
+    {
+        var nextPiece = RandomPieces[Random.Range(0, RandomPieces.Length)];
+        CurrentPiece = nextPiece;
+        
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.tag == CustomTag.PlayerCube.ToString())
             {
-                var color = coreSquare.GetComponent<MeshRenderer>().material.color;
-                color.r = Mathf.Min(1f, color.r + 0.25f);
-                color.g = Mathf.Min(1f, color.g + 0.25f);
-                color.b = Mathf.Min(1f, color.b + 0.25f);
-                coreSquare.GetComponent<MeshRenderer>().material.color = color;
+                Destroy(child.gameObject);
             }
+        }
+
+        foreach (var squarePosition in SquarePositions[nextPiece])
+        {
+            var square = Instantiate(PlayerCube, transform.position + squarePosition + _correction, Quaternion.identity);
+            square.transform.parent = gameObject.transform;
+            square.GetComponent<MeshRenderer>().material = PieceMaterial;
+        }
+
+        var coreSquare = Instantiate(PlayerCube, transform.position + new Vector3(0.5f, 0.5f, -0.1f) + _correction, Quaternion.identity);
+        coreSquare.transform.parent = gameObject.transform;
+        coreSquare.GetComponent<MeshRenderer>().material = PieceMaterial;
+        coreSquare.GetComponent<CubeCollider>().IsCore = true;
+
+        if (_ammo > 0)
+        {
+            var color = coreSquare.GetComponent<MeshRenderer>().material.color;
+            color.r = Mathf.Min(1f, color.r + 0.25f);
+            color.g = Mathf.Min(1f, color.g + 0.25f);
+            color.b = Mathf.Min(1f, color.b + 0.25f);
+            coreSquare.GetComponent<MeshRenderer>().material.color = color;
         }
     }
 
@@ -155,6 +167,14 @@ public class PieceGenerator : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public void OnChangePieceInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            ChangePiece();
         }
     }
 
