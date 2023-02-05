@@ -71,6 +71,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangePiece"",
+                    ""type"": ""Button"",
+                    ""id"": ""53d61fd1-df86-4b86-b4d3-ef293e0e111e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,6 +300,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2039b264-41ad-409a-9fd5-2d1d83634a59"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ChangePiece"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee36e4cd-4b8a-4766-9522-acaa460d976d"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ChangePiece"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -883,6 +914,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_RotateLeft = m_Player.FindAction("RotateLeft", throwIfNotFound: true);
         m_Player_RotateRight = m_Player.FindAction("RotateRight", throwIfNotFound: true);
         m_Player_Special = m_Player.FindAction("Special", throwIfNotFound: true);
+        m_Player_ChangePiece = m_Player.FindAction("ChangePiece", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -959,6 +991,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RotateLeft;
     private readonly InputAction m_Player_RotateRight;
     private readonly InputAction m_Player_Special;
+    private readonly InputAction m_Player_ChangePiece;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -968,6 +1001,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @RotateLeft => m_Wrapper.m_Player_RotateLeft;
         public InputAction @RotateRight => m_Wrapper.m_Player_RotateRight;
         public InputAction @Special => m_Wrapper.m_Player_Special;
+        public InputAction @ChangePiece => m_Wrapper.m_Player_ChangePiece;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -992,6 +1026,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Special.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
                 @Special.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
                 @Special.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
+                @ChangePiece.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangePiece;
+                @ChangePiece.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangePiece;
+                @ChangePiece.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangePiece;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1011,6 +1048,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Special.started += instance.OnSpecial;
                 @Special.performed += instance.OnSpecial;
                 @Special.canceled += instance.OnSpecial;
+                @ChangePiece.started += instance.OnChangePiece;
+                @ChangePiece.performed += instance.OnChangePiece;
+                @ChangePiece.canceled += instance.OnChangePiece;
             }
         }
     }
@@ -1172,6 +1212,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnRotateLeft(InputAction.CallbackContext context);
         void OnRotateRight(InputAction.CallbackContext context);
         void OnSpecial(InputAction.CallbackContext context);
+        void OnChangePiece(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
