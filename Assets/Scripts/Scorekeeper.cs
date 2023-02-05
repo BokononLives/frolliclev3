@@ -9,7 +9,7 @@ public class Scorekeeper : MonoBehaviour
 {
     public GameObject CountdownTimer;
     public TMP_Text TextPanel;
-    public Button Button;
+    public GameObject Button;
 
     void Start()
     {
@@ -36,6 +36,6 @@ public class Scorekeeper : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         TextPanel.text = text;
-        Button.enabled = true;
+        this.Button.SetActive(true);
     }
 }
