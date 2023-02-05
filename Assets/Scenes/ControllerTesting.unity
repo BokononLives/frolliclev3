@@ -161,12 +161,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 33368357}
-        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
-        m_MethodName: CreateRandomHairColor
-        m_Mode: 0
+        m_TargetAssemblyTypeName: PlayerManagerV1, Assembly-CSharp
+        m_MethodName: ChangePlayerColor
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1073233657831726574, guid: 2a3377763f5fe05479e109c3262983ba,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.PlayerInput,
+            Unity.InputSystem
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -222,7 +224,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 33368354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad49617fc6380174397e6f657690b678, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cd40a782d1a86d489f7abb23aa26d88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _hairMaterial: {fileID: 2100000, guid: 3056bfb20ad4cab468bc2caf6b393ca6, type: 2}
@@ -695,72 +697,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6739555508296088815
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6739555506591621504, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_Name
-      value: CountdownTimer
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6739555506591621535, guid: afd96caaba8e6f6418fc50e8b2efb752,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: afd96caaba8e6f6418fc50e8b2efb752, type: 3}
