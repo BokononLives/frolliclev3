@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuTesting.unity
     guid: c603a43e3638f8944af4cf32e7ff2046
+  - enabled: 1
+    path: Assets/Scenes/ControllerTesting.unity
+    guid: b2da42fc34ab93f4e89aada9f35d8c54
   m_configObjects: {}
